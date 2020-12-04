@@ -50,36 +50,19 @@ export default function Page() {
 
     <Paper className={classes.root}>
     <Typography variant="body2" gutterBottom>
-      <p><a className={classes.link} href="https://material-ui.com/components/dialogs/"> Material Ui Dialog</a></p>
-      
+      <p><a className={classes.link} href="https://material-ui.com/components/text-fields/"> Material Forms</a></p>    
+      <p><b><a className={classes.link} href="https://github.com/ajcm/react-materialui-template/blob/main/src/pages/UseForm.js">View Code</a></b></p>        
     </Typography>
-      <pre>{`
-      <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description">
 
-        <DialogTitle id="alert-dialog-title">{"Dialog"}</DialogTitle>
-        
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-          ....
-          </DialogContentText>
-        </DialogContent>
-        
-        <DialogActions>    
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-       `}</pre>
-
+<pre>
+{`
+    
+`}
+</pre>
     </Paper>
 
     <Paper className={classes.root}> 
-      <AlertDialog/>
+      <Example/>
     </Paper>
 
       
@@ -89,48 +72,15 @@ export default function Page() {
 
 
 
-export function AlertDialog() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const DialogWindow = () =>
-    <div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Dialog"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-         
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  
+export function Example() {
+ 
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="outlined" color="primary">
         Open alert dialog
       </Button>   
-      <DialogWindow />
+     
     </div>
   );
 }
