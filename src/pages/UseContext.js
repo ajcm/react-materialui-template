@@ -1,8 +1,9 @@
+import React,{useEffect,useState,useContext,createContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import React,{useEffect,useState} from 'react';
-import Title from '../components/Title';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+
+import Title from '../components/Title';
 
 const useStyles = makeStyles({
   root: {
@@ -33,90 +34,84 @@ const useStyles = makeStyles({
   }
 });
 
+const SharedContext = createContext();
+
 export default function Page() {
   const classes = useStyles();
 
   return (
     <React.Fragment>
-    <Title>useEffect</Title>
+    <Title>useContext</Title>
         
     <Paper className={classes.root}>
     <Typography variant="body2" gutterBottom>
-      <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#usestate"> useState documentation </a></p>
-      <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#useeffect"> useEffect documentation</a></p>
+      <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#useContext"> useContext documentation </a></p>
     </Typography>
-      <pre>{`
-        const [state, setState] = useState();
+      <pre>
+      {`
+      //create context
+      const SharedContext = createContext();
+      const [message, setMessage] = React.useState();
 
-        useEffect(() => {
+      //enclose tags
+      <SharedContext.Provider value={{message, setMessage}}>
+      ...
+      </SharedContext.Provider> 
 
-            /* do things */
+      //use in components
+      const {message, setMessage} = React.useContext(SharedContext);
 
-            /* function to be called in unmount */ 
-             return () => unmount(); 
-
-        }); `}</pre>
-
+      `}
+      </pre>
     </Paper>
     <Example/>      
     </React.Fragment>
   );
 }
 
-const calculateTimeLeft = () => {
-  let year = new Date().getFullYear();
-  const difference = +new Date(`${year}-12-31`) - +new Date();
-  let timeLeft = {};
-
-  if (difference > 0) {
-    timeLeft = {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
-    };
-  }
-
-  return timeLeft;
-};
 
 
-/* https://github.com/do-community/react-hooks-timer/blob/master/src/App.js */
+
 function Example() {
   const classes = useStyles();
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [year] = useState(new Date().getFullYear());
+  const [message, setMessage] = React.useState();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+  // const {session,setSession,user,setUser,menuOpen, setMenuOpen} = React.useContext(AppContext);
 
-      // Clear timeout if the component is unmounted
-      /* function to be called in unmount */ 
-      /* return () => clearTimeout(timer); */
 
-  });
-
-  const timerComponents = [];
-
-  Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval]) {
-      return;
-    }
-
-    timerComponents.push(
-      <span>
-        {timeLeft[interval]} {interval}{" "}
-      </span>
-    );
-  });
   return (
+    <SharedContext.Provider value={{message, setMessage}}>
     <Paper className={classes.root}>
-      New Year's Eve Counter: {timerComponents.length ? timerComponents : <span>Time's up!</span>}
+    <InputField/>    
+    <OutputField/> 
     </Paper>
+    </SharedContext.Provider>  
   );
+
+}
+
+
+
+const InputField = () => {
+  const classes = useStyles();
+  const {message, setMessage} = React.useContext(SharedContext);
+  
+  return (
+      <p>Message: {message ? message : 'n/a'} </p>  
+  );
+
+}
+
+
+const OutputField = () => {
+  const classes = useStyles();
+  const {message, setMessage} = React.useContext(SharedContext);
+  
+  return (
+      <p>Message: {message ? message : 'n/a'} </p>  
+  );
+
 }
 
 
