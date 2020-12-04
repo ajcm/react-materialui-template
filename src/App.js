@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
+import React, { useState } from 'react';
+import { CommonLoading } from 'react-loading';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { AppContext } from '../src/context/AppContext';
+import Template from './components/Template';
+import theme from './theme';
 
-function App() {
+import Home from './pages/Home';
+import About from './pages/About';
+import Effect from './pages/Effect';
+
+const App = (props) => {
+  const [menuOpen, setMenuOpen] = useState(true);
+
+  if (props.isLoading) {
+    return <CommonLoading />;
+} else {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{menuOpen,setMenuOpen}}>
+    <ThemeProvider theme={theme}>
+    <CssBaseline />        
+    <BrowserRouter>            
+      <Routes />         
+    </BrowserRouter>
+    </ThemeProvider>
+     </AppContext.Provider>
   );
 }
+}
 
-export default App;
+
+const Routes = () => {
+  return (
+  <Switch>
+
+     <Route path="/" exact >
+        <Template><Home/></Template>
+      </Route>
+
+      <Route path="/about" exact >
+        <Template><About/></Template>
+      </Route>
+
+      <Route path="/useEffect" exact >
+        <Template><Effect/></Template>
+      </Route>
+
+
+    </Switch>
+  )}
+  
+
+
+
+
+
+export default App
