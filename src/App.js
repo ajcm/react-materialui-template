@@ -12,7 +12,8 @@ import About from './pages/About';
 import UseEffect from './pages/UseEffect';
 import Dialog from './pages/Dialog';
 import UseContext from './pages/UseContext';
-import Forms from './pages/UseContext';
+import UseRef from './pages/UseRef';
+import UseForm from './pages/UseForm';
 
 const App = (props) => {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -49,13 +50,17 @@ const Routes = () => {
       <Route path="/useEffect" exact >
         <Template><UseEffect/></Template>
       </Route>
-      
+
+      <Route path="/useRef" exact >
+        <Template><UseRef/></Template>
+      </Route>
+
       <Route path="/useContext" exact >
         <Template><UseContext/></Template>
       </Route>
 
-      <Route path="/Forms" exact >
-        <Template><Forms/></Template>
+      <Route path="/Form" exact >
+        <Template><UseForm/></Template>
       </Route>
 
       <Route path="/Dialog" exact >

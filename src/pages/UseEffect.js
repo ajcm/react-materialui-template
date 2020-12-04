@@ -44,21 +44,24 @@ export default function Page() {
     <Typography variant="body2" gutterBottom>
       <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#usestate"> useState documentation </a></p>
       <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#useeffect"> useEffect documentation</a></p>
-      <p><b><a className={classes.link} href="https://github.com/ajcm/react-materialui-template/blob/main/src/pages/Effect.js">View Code</a></b></p>      
+      <p><b><a className={classes.link} href="https://github.com/ajcm/react-materialui-template/blob/main/src/pages/UseEffect.js">View Code</a></b></p>      
     </Typography>
 
-      <pre>
-        {`
-        const [state, setState] = useState();
+<pre>
+{`
+  const [state, setState] = useState();
 
-        useEffect(() => {
+  useEffect(() => {
+    /* do things */
 
-            /* do things */
+    /* for async code, needs to call another function */
 
-            /* function to be called in unmount */ 
-             return () => unmount(); 
+    /* function to be called in unmount */ 
+    return () => unmount(); 
+  }); 
 
-        }); `}
+
+`}
         </pre>
 
     </Paper>

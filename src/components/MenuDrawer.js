@@ -167,18 +167,6 @@ export default function Dashboard() {
             <ListItemText primary="useRef" />
           </ListItem>
 
-
-
-          <ListItem button  onClick={() => redirect('/Form')}>    
-            <ListItemIcon>
-              <ListAltIcon />
-            </ListItemIcon>
-            <ListItemText primary="Form" />
-          </ListItem>
-
-
-
-
           <ListItem button  onClick={() => redirect('/Dialog')}>    
             <ListItemIcon>
               <ListAltIcon />
@@ -186,8 +174,12 @@ export default function Dashboard() {
             <ListItemText primary="Dialog" />
           </ListItem>
 
-
-
+          <ListItem button  onClick={() => redirect('/Form')}>    
+            <ListItemIcon>
+              <ListAltIcon />
+            </ListItemIcon>
+            <ListItemText primary="Form" />
+          </ListItem>
 
           <ListItem button onClick={() => redirect('/about')}>
             <ListItemIcon>

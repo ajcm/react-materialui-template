@@ -46,7 +46,7 @@ export default function Page() {
 
   return (
     <React.Fragment>
-    <Title>Dialog</Title>
+    <Title>Form</Title>
 
     <Paper className={classes.root}>
     <Typography variant="body2" gutterBottom>

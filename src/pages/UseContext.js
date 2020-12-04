@@ -2,6 +2,7 @@ import React,{useEffect,useState,useContext,createContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 import Title from '../components/Title';
 
@@ -46,22 +47,22 @@ export default function Page() {
     <Paper className={classes.root}>
     <Typography variant="body2" gutterBottom>
       <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#useContext"> useContext documentation </a></p>
+      <p><b><a className={classes.link} href="https://github.com/ajcm/react-materialui-template/blob/main/src/pages/UseContext.js">View Code</a></b></p>    
     </Typography>
       <pre>
-      {`
-      //create context
-      const SharedContext = createContext();
-      const [message, setMessage] = React.useState();
+{`
+  //create context
+  const SharedContext = createContext();
+  const [message, setMessage] = React.useState();
 
-      //enclose tags
-      <SharedContext.Provider value={{message, setMessage}}>
-      ...
-      </SharedContext.Provider> 
+  //enclose tags
+  <SharedContext.Provider value={{message, setMessage}}>
+  ...
+  </SharedContext.Provider> 
 
-      //use in components
-      const {message, setMessage} = React.useContext(SharedContext);
-
-      `}
+  //use in components
+  const {message, setMessage} = React.useContext(SharedContext);
+`}
       </pre>
     </Paper>
     <Example/>      
@@ -74,31 +75,33 @@ export default function Page() {
 
 function Example() {
   const classes = useStyles();
-
   const [message, setMessage] = React.useState();
-
-  // const {session,setSession,user,setUser,menuOpen, setMenuOpen} = React.useContext(AppContext);
 
 
   return (
     <SharedContext.Provider value={{message, setMessage}}>
-    <Paper className={classes.root}>
-    <InputField/>    
-    <OutputField/> 
-    </Paper>
+      <Paper className={classes.root}>
+      <InputField/>    
+      <OutputField/> 
+      <OutputField2/>
+      </Paper>
     </SharedContext.Provider>  
   );
-
 }
-
 
 
 const InputField = () => {
   const classes = useStyles();
   const {message, setMessage} = React.useContext(SharedContext);
+
+  const onChange = (event) => {
+    const value = event.target.value;
+    setMessage(value)
+
+  }
   
   return (
-      <p>Message: {message ? message : 'n/a'} </p>  
+      <p><TextField id="standard-required" label="Type message:" defaultValue="" value={message ? message : ''}   onChange={onChange}  /></p>  
   );
 
 }
@@ -111,6 +114,16 @@ const OutputField = () => {
   return (
       <p>Message: {message ? message : 'n/a'} </p>  
   );
+
+}
+
+const OutputField2 = () => {
+  const classes = useStyles();
+  const {message, setMessage} = React.useContext(SharedContext);
+  
+  return (
+      <Typography variant="body2" gutterBottom style={{ backgroundColor: '#cfe8fc' }}>  <p>Message #2: {message ? message : 'n/a'} </p>  </Typography>
+  ); 
 
 }
 

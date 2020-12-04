@@ -1,8 +1,11 @@
+import React,{useEffect,useState,useRef,forwardRef,useImperativeHandle} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import React,{useEffect,useState} from 'react';
-import Title from '../components/Title';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import Title from '../components/Title';
 
 const useStyles = makeStyles({
   root: {
@@ -38,86 +41,93 @@ export default function Page() {
 
   return (
     <React.Fragment>
-    <Title>useEffect</Title>
+    <Title>useRef</Title>
+    <Typography variant="subtitle" gutterBottom>Reference to child</Typography>
         
     <Paper className={classes.root}>
     <Typography variant="body2" gutterBottom>
-      <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#usestate"> useState documentation </a></p>
-      <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#useeffect"> useEffect documentation</a></p>
+      <p><a className={classes.link} href="https://reactjs.org/docs/hooks-reference.html#useref"> useRef documentation</a></p>
+      <p><b><a className={classes.link} href="https://github.com/ajcm/react-materialui-template/blob/main/src/pages/UseRef.js">View Code</a></b></p>    
     </Typography>
-      <pre>{`
-        const [state, setState] = useState();
+      <pre>
+{`
+  //create ref
+  const childRef = useRef();
+  < ... ref={childRef} >
 
-        useEffect(() => {
-
-            /* do things */
-
-            /* function to be called in unmount */ 
-             return () => unmount(); 
-
-        }); `}</pre>
-
+  //use in child
+  const Component = forwardRef((props, ref) => { 
+    ...
+  })
+`}
+      </pre>
     </Paper>
     <Example/>      
     </React.Fragment>
   );
 }
 
-const calculateTimeLeft = () => {
-  let year = new Date().getFullYear();
-  const difference = +new Date(`${year}-12-31`) - +new Date();
-  let timeLeft = {};
 
-  if (difference > 0) {
-    timeLeft = {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
-    };
-  }
-
-  return timeLeft;
-};
-
-
-/* https://github.com/do-community/react-hooks-timer/blob/master/src/App.js */
 function Example() {
   const classes = useStyles();
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [year] = useState(new Date().getFullYear());
+  const childRef = useRef();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+  const doReset = () => {
+    childRef.current.doAction('')
+  }
 
-      // Clear timeout if the component is unmounted
-      /* function to be called in unmount */ 
-      /* return () => clearTimeout(timer); */
 
-  });
-
-  const timerComponents = [];
-
-  Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval]) {
-      return;
-    }
-
-    timerComponents.push(
-      <span>
-        {timeLeft[interval]} {interval}{" "}
-      </span>
-    );
-  });
   return (
-    <Paper className={classes.root}>
-      New Year's Eve Counter: {timerComponents.length ? timerComponents : <span>Time's up!</span>}
-    </Paper>
+      <Paper className={classes.root}>
+      <ButtonField callback={doReset} />
+      <InputField ref={childRef}/>    
+      </Paper>
   );
 }
+
+
+
+const ButtonField = ({callback}) => {
+  const classes = useStyles();
+
+  const onClick = (event) => {
+    
+
+  }
+  
+  return (
+      <p><Button variant="contained" color="primary"  component="span"  onClick={callback} style={{marginLeft:'15px'}}>Clear Text</Button></p>  
+  );
+
+}
+
+const InputField = forwardRef((props, ref) => {
+  const classes = useStyles();
+  const [value,setValue] = useState()
+
+  const onChange = (event) => {
+    const _value = event.target.value;
+    setValue(_value)
+  }
+
+  const onClick = (event) => {
+    setValue('')
+  }
+
+
+  useImperativeHandle(ref, () => {
+    return {
+        doAction: (value) =>  setValue(value)
+  }});
+  
+  return (
+      <p><TextField id="standard-required" label="Type message:" defaultValue="" value={value ? value : ''}   onChange={onChange}  /></p>  
+  );
+
+})
+
+
 
 
 

@@ -51,6 +51,7 @@ export default function Page() {
     <Paper className={classes.root}>
     <Typography variant="body2" gutterBottom>
       <p><a className={classes.link} href="https://material-ui.com/components/dialogs/"> Material Ui Dialog</a></p>
+      <p><b><a className={classes.link} href="https://github.com/ajcm/react-materialui-template/blob/main/src/pages/Dialog.js">View Code</a></b></p>   
       
     </Typography>
       <pre>{`
@@ -81,8 +82,6 @@ export default function Page() {
     <Paper className={classes.root}> 
       <AlertDialog/>
     </Paper>
-
-      
     </React.Fragment>
   );
 }
@@ -117,7 +116,7 @@ export function AlertDialog() {
         </DialogContent>
         <DialogActions>
          
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button  variant="contained" onClick={handleClose} color="primary" autoFocus>
             Close
           </Button>
         </DialogActions>
