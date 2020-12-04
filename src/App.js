@@ -10,6 +10,9 @@ import theme from './theme';
 import Home from './pages/Home';
 import About from './pages/About';
 import Effect from './pages/Effect';
+import Dialog from './pages/Dialog';
+import UseContext from './pages/UseContext';
+import Forms from './pages/UseContext';
 
 const App = (props) => {
   const [menuOpen, setMenuOpen] = useState(true);
@@ -46,6 +49,19 @@ const Routes = () => {
       <Route path="/useEffect" exact >
         <Template><Effect/></Template>
       </Route>
+      
+      <Route path="/useContext" exact >
+        <Template><UseContext/></Template>
+      </Route>
+
+      <Route path="/Forms" exact >
+        <Template><Forms/></Template>
+      </Route>
+
+      <Route path="/Dialog" exact >
+        <Template><Dialog/></Template>
+      </Route>
+
 
 
     </Switch>

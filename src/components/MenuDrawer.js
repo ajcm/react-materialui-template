@@ -153,6 +153,40 @@ export default function Dashboard() {
             <ListItemText primary="useEffect" />
           </ListItem>
 
+          <ListItem button  onClick={() => redirect('/useContext')}>    
+            <ListItemIcon>
+              <ListAltIcon />
+            </ListItemIcon>
+            <ListItemText primary="useContext" />
+          </ListItem>
+
+          <ListItem button  onClick={() => redirect('/useRef')}>    
+            <ListItemIcon>
+              <ListAltIcon />
+            </ListItemIcon>
+            <ListItemText primary="useRef" />
+          </ListItem>
+
+
+
+          <ListItem button  onClick={() => redirect('/Form')}>    
+            <ListItemIcon>
+              <ListAltIcon />
+            </ListItemIcon>
+            <ListItemText primary="Form" />
+          </ListItem>
+
+
+
+
+          <ListItem button  onClick={() => redirect('/Dialog')}>    
+            <ListItemIcon>
+              <ListAltIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dialog" />
+          </ListItem>
+
+
 
 
           <ListItem button onClick={() => redirect('/about')}>
